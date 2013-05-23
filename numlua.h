@@ -36,10 +36,22 @@ NUMLUA_API void nl_require (lua_State *L, const char *modname,
     lua_CFunction openf, int glb);
 #define lua_pushglobaltable(L) lua_pushvalue(L, LUA_GLOBALSINDEX)
 #else
-#define lua_number2int(i,n) ((i)=(int)(n))
 #define nl_register luaL_setfuncs
 #define nl_require luaL_requiref
 #endif
+
+#if (LUA_VERSION_NUM <= 501) || defined(LUA_JITLIBNAME)
+static inline int lua_number2integer_f(double d)
+{
+	if (d < INT_MIN)
+		return INT_MIN;
+	if (d > INT_MAX)
+		return INT_MAX;
+	return (int)d;
+}
+#define lua_number2int(i, d) i=lua_number2integer_f(d)
+#endif
+
 NUMLUA_API int nl_typeerror (lua_State *L, int narg, const char *tname);
 
 NUMLUA_API int nl_opmode;
