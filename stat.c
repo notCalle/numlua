@@ -79,7 +79,7 @@ typedef struct {
 static int stat_factor (lua_State *L) {
   int i, n = (int) lua_rawlen(L, 1);
   nl_Factor *f;
-  unsigned char m, l = 0; /* # levels */
+  unsigned char m;
   lua_settop(L, 1);
   luaL_argcheck(L, n > 0, 1, "length must be positive");
   f = (nl_Factor *) lua_newuserdata(L, sizeof(nl_Factor) + n - 1);
