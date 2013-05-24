@@ -4621,10 +4621,16 @@ static int matrix_ls (lua_State *L) {
 
 /* {=======   Fourier Transforms   =======} */
 
+#ifdef HAVE_LIBFFTW3
 fftw_plan nl_createplan (lua_State *L,
     nl_Matrix *m, int inverse, unsigned flags, lua_Number *scale);
+#endif
 
 static int matrix_fft (lua_State *L) {
+#ifndef HAVE_LIBFFTW3
+  luaL_error(L, "fftw3 not avaiable");
+  return 0;
+#else
   nl_Matrix *m = checkmatrix(L, 1);
   int inverse = lua_toboolean(L, 2);
   int wisdomonly = lua_toboolean(L, 3);
@@ -4649,9 +4655,14 @@ static int matrix_fft (lua_State *L) {
   if (inverse) /* scale? */
     ZDSCAL(&m->size, &scale, CPX(m->data), &m->stride);
   return 1;
+#endif
 }
 
 static int matrix_fct (lua_State *L) {
+#ifndef HAVE_LIBFFTW3
+  luaL_error(L, "fftw3 not avaiable");
+  return 0;
+#else
   nl_Matrix *m = checkmatrix(L, 1);
   int inverse = lua_toboolean(L, 2);
   int wisdomonly = lua_toboolean(L, 3);
@@ -4676,6 +4687,7 @@ static int matrix_fct (lua_State *L) {
   if (inverse) /* scale? */
     DSCAL(&m->size, &scale, m->data, &m->stride);
   return 1;
+#endif
 }
 
 

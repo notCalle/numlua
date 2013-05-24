@@ -16,7 +16,9 @@
 #include <lauxlib.h>
 #include <math.h>
 #include <complex.h>
+#ifdef HAVE_LIBFFTW3
 #include <fftw3.h>
+#endif
 #include <hdf5.h>
 #include "blas.h"
 #include "lapack.h"

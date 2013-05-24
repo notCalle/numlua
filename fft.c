@@ -12,7 +12,7 @@
 #include "numlua.h"
 
 #define PLAN_LIBNAME "plan"
-
+#ifdef HAVE_LIBFFTW3
 typedef struct {
   fftw_plan plan;
   nl_Matrix *cache;
@@ -194,4 +194,8 @@ NUMLUA_API int luaopen_numlua_fft (lua_State *L) {
   lua_setfield(L, -2, "flag"); /* fft.flag */
   return 1;
 }
-
+#else
+NUMLUA_API int luaopen_numlua_fft (lua_State *L) {
+  return 0;
+}
+#endif
