@@ -12,6 +12,11 @@
 
 #define H5_NO_DEPRECATED_SYMBOLS /* use HDF5 1.8 */
 
+#if LUA_VERSION_NUM > 501
+/* Needed for lua_number2int */
+#include <llimits.h>
+#endif
+
 #include <lua.h>
 #include <lauxlib.h>
 #include <math.h>
