@@ -47,7 +47,7 @@ NUMLUA_API void nl_require (lua_State *L, const char *modname,
 #define nl_require luaL_requiref
 #endif
 
-#if (LUA_VERSION_NUM <= 501) || defined(LUA_JITLIBNAME)
+#if !defined(lua_number2int) && ((LUA_VERSION_NUM <= 501) || defined(LUA_JITLIBNAME))
 static inline int lua_number2integer_f(double d)
 {
 	if (d < INT_MIN)
