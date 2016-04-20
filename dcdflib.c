@@ -6083,6 +6083,7 @@ S90:
     if(!(yy == 0.0e0)) goto S100;
     *status = 0;
     qok = 1;
+    (void)qok;
     return;
 S100:
     qup = (qincr && yy < 0.0e0) || (!qincr && yy > 0.0e0);

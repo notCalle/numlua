@@ -4727,6 +4727,7 @@ static int matrix_save (lua_State *L) {
   status = H5Sclose(dataspace_id);
   status = H5Dclose(dataset_id);
   status = H5Fclose(file_id);
+  (void)status;
   return 0;
 }
 
