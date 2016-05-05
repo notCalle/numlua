@@ -4761,6 +4761,7 @@ static int matrix_load (lua_State *L) {
     status = H5Tclose(type_id);
   status = H5Dclose(dataset_id);
   status = H5Fclose(file_id);
+  (void)status;
   return 1;
 }
 
