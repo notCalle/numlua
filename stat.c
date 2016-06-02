@@ -882,7 +882,6 @@ static int stat_pnorm (lua_State *L) {
   int which = 1;
   int status;
   check_norm(L, 1, x, sd);
-  q = 1 - p;
   cdfnor(&which, &p, &q, &x, &mean, &sd, &status, &bound);
   check_status(L, status, bound);
   lua_pushnumber(L, p);
@@ -940,7 +939,6 @@ static int stat_ppois (lua_State *L) {
   int which = 1;
   int status;
   check_pois(L, 1, s, xlam);
-  q = 1 - p;
   cdfpoi(&which, &p, &q, &s, &xlam, &status, &bound);
   check_status(L, status, bound);
   lua_pushnumber(L, p);
@@ -1002,7 +1000,6 @@ static int stat_pt (lua_State *L) {
   int which = 1;
   int status;
   check_t(L, 1, t, df);
-  q = 1 - p;
   cdft(&which, &p, &q, &t, &df, &status, &bound);
   check_status(L, status, bound);
   lua_pushnumber(L, p);
