@@ -946,6 +946,7 @@ static lua_Number nl_rcond (lua_State *L, nl_Matrix *m, char what,
           ZPOCON(&uplo, &n, CPX(m->data), &lda, &norm, &rcond,
               CPX(work->data.bnum), xwork->data.bnum, info, 1);
         }
+        else rcond = 0;
       }
       else {
         DPOTRF(&uplo, &n, m->data, &lda, &rfinfo, 1);
@@ -955,7 +956,7 @@ static lua_Number nl_rcond (lua_State *L, nl_Matrix *m, char what,
           xwork = nl_getbuffer(L, n);
           DPOCON(&uplo, &n, m->data, &lda, &norm, &rcond,
               work->data.bnum, xwork->data.bint, info, 1);
-        }
+        } else rcond = 0;
       }
       break;
     }
@@ -969,6 +970,7 @@ static lua_Number nl_rcond (lua_State *L, nl_Matrix *m, char what,
           ZGECON(&cnorm, &n, CPX(m->data), &lda, &norm, &rcond,
               CPX(work->data.bnum), xwork->data.bnum, info, 1);
         }
+        else rcond = 0;
       }
       else {
         DGETRF(&n, &n, m->data, &lda, ipiv, &rfinfo);
@@ -979,6 +981,7 @@ static lua_Number nl_rcond (lua_State *L, nl_Matrix *m, char what,
           DGECON(&cnorm, &n, m->data, &lda, &norm, &rcond,
               work->data.bnum, xwork->data.bint, info, 1);
         }
+        else rcond = 0;
       }
     }
   }
