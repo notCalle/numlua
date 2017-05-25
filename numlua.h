@@ -36,7 +36,9 @@
 #define nl_register(L,l,n) luaL_openlib(L,NULL,l,n)
 #define luaL_newlibtable(L,l) \
   lua_createtable(L, 0, sizeof(l)/sizeof((l)[0]) - 1)
+#ifndef luaL_newlib
 #define luaL_newlib(L,l) (luaL_newlibtable(L,l), nl_register(L,l,0))
+#endif
 #define lua_setuservalue lua_setfenv
 #define lua_getuservalue lua_getfenv
 NUMLUA_API void nl_require (lua_State *L, const char *modname,
