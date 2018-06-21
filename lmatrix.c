@@ -885,7 +885,7 @@ static int nl_lu (nl_Matrix *a, nl_Buffer *ipiv) {
 static lua_Number nl_rcond (lua_State *L, nl_Matrix *m, char what,
     int *ipiv, int *info) {
   lua_Number norm, rcond;
-  nl_Buffer *work, *xwork;
+  nl_Buffer *work = NULL, *xwork = NULL;
   int n = m->dim[0], lda = LD(m, 0);
   char cnorm = '1';
   int rfinfo;
