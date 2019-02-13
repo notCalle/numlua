@@ -14,7 +14,7 @@
 
 #if LUA_VERSION_NUM > 501
 /* Needed for lua_number2int */
-#include <llimits.h>
+#include "number2int.h"
 #endif
 
 #include <lua.h>
